@@ -3,6 +3,8 @@ package edu.dhs.bookmanagementsystem.sys.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import edu.dhs.bookmanagementsystem.sys.entity.User;
 
+import java.util.Map;
+
 /**
  * <p>
  * 服务类
@@ -13,4 +15,5 @@ import edu.dhs.bookmanagementsystem.sys.entity.User;
  */
 public interface IUserService extends IService<User> {
 
+    Map<String, Object> login(User user);
 }
