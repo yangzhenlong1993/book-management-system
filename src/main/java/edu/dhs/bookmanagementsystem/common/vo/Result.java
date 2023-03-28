@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.Map;
+
 /**
  * @program: book-management-system
  * @description: common result vo
@@ -50,5 +52,9 @@ public class Result<T> {
 
     public static <T> Result<T> fail(String message, T data) {
         return new Result<>(30000, message, data);
+    }
+
+    public static Result<Map<String, Object>> fail(int code, String message) {
+        return new Result<>(code, message, null);
     }
 }
