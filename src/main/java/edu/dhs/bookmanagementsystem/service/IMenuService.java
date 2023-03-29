@@ -3,6 +3,8 @@ package edu.dhs.bookmanagementsystem.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import edu.dhs.bookmanagementsystem.entity.Menu;
 
+import java.util.List;
+
 /**
  * <p>
  * 服务类
@@ -13,4 +15,5 @@ import edu.dhs.bookmanagementsystem.entity.Menu;
  */
 public interface IMenuService extends IService<Menu> {
 
+    List<Menu> getAllMenu();
 }

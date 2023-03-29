@@ -1,11 +1,16 @@
 package edu.dhs.bookmanagementsystem.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -42,19 +47,17 @@ public class Menu implements Serializable {
 
     private Boolean hidden;
 
-    @Override
-    public String toString() {
-        return "Menu{" +
-                "menuId=" + menuId +
-                ", component=" + component +
-                ", path=" + path +
-                ", redirect=" + redirect +
-                ", name=" + name +
-                ", title=" + title +
-                ", icon=" + icon +
-                ", parentId=" + parentId +
-                ", isLeaf=" + isLeaf +
-                ", hidden=" + hidden +
-                "}";
+    @TableField(exist = false)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private List<Menu> children;
+
+    @TableField(exist = false)
+    private Map<String, Object> meta;
+
+    public Map<String, Object> getMeta() {
+        meta = new HashMap<>();
+        meta.put("title", title);
+        meta.put("icon", icon);
+        return meta;
     }
 }
