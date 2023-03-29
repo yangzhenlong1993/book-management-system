@@ -1,7 +1,7 @@
 package edu.dhs.bookmanagementsystem;
 
-import edu.dhs.bookmanagementsystem.sys.entity.User;
-import edu.dhs.bookmanagementsystem.sys.mapper.UserMapper;
+import edu.dhs.bookmanagementsystem.entity.User;
+import edu.dhs.bookmanagementsystem.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

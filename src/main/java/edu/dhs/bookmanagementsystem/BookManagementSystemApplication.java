@@ -8,7 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
-@MapperScan("edu.dhs.bookmanagementsystem.*.mapper")
+@MapperScan("edu.dhs.bookmanagementsystem.mapper")
 public class BookManagementSystemApplication {
 
     public static void main(String[] args) {
