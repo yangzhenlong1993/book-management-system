@@ -23,11 +23,11 @@ public class CodeGenerator {
                 })
                 .packageConfig(builder -> {
                     builder.parent("edu.dhs.bookmanagementsystem") // 设置父包名
-                            .moduleName("sys") // 设置父包模块名
-                            .pathInfo(Collections.singletonMap(OutputFile.xml, "C:\\Users\\yangz\\IdeaProjects\\book-management-system\\src\\main\\resources\\mapper\\sys")); // 设置mapperXml生成路径
+                            .moduleName(null) // 设置父包模块名
+                            .pathInfo(Collections.singletonMap(OutputFile.xml, "C:\\Users\\yangz\\IdeaProjects\\book-management-system\\src\\main\\resources\\mapper")); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("menu,role,role_menu,user,user_role") // 设置需要生成的表名
+                    builder.addInclude("book,book_status,borrowing_archives") // 设置需要生成的表名
                             .addTablePrefix("t_", "c_"); // 设置过滤表前缀
                 })
                 .templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板
