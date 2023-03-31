@@ -1,11 +1,15 @@
 package edu.dhs.bookmanagementsystem.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * <p>
@@ -15,8 +19,10 @@ import java.io.Serializable;
  * @author Zhenlong Yang
  * @since 2023-03-25
  */
-@ApiModel(value = "Role对象", description = "")
+@ApiModel(value = "Role object", description = "")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -30,12 +36,6 @@ public class Role implements Serializable {
 
     private Integer deleted;
 
-    @Override
-    public String toString() {
-        return "Role{" +
-                "roleId=" + roleId +
-                ", roleName=" + roleName +
-                ", roleDesc=" + roleDesc +
-                "}";
-    }
+    @TableField(exist = false)
+    private List<Integer> menuIdList;
 }

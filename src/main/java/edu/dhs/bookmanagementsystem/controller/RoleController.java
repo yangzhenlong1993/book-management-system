@@ -6,6 +6,7 @@ import edu.dhs.bookmanagementsystem.service.IRoleService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,13 +43,19 @@ public class RoleController {
 
     @GetMapping("/{id}")
     public Result<Role> getRoleById(@PathVariable("id") Integer id) {
-        Role role = roleService.getById(id);
+        Role role = roleService.getRoleById(id);
         return Result.success(role);
     }
 
     @DeleteMapping("/{id}")
     public Result<?> deleteRoleById(@PathVariable("id") Integer id) {
-        roleService.removeById(id);
+        roleService.deleteRoleById(id);
         return Result.success("delete role successfully");
+    }
+
+    @GetMapping("/all")
+    public Result<List<Role>> getAllRole() {
+        List<Role> roleList = roleService.list();
+        return Result.success(roleList);
     }
 }

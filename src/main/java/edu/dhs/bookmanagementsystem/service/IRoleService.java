@@ -20,4 +20,8 @@ public interface IRoleService extends IService<Role> {
     void addRole(Role role);
 
     void updateRole(Role role);
+
+    Role getRoleById(Integer id);
+
+    void deleteRoleById(Integer id);
 }

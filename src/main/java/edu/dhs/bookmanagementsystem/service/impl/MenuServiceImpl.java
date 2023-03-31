@@ -31,6 +31,25 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
         return levelOneMenuList;
     }
 
+    @Override
+    public List<Menu> getMenuListByUserId(Integer uid) {
+        //level 1 menu
+        List<Menu> menuList = this.baseMapper.getMenuListByUserId(uid, 0);
+        //children menu
+        setMenuChildrenByUserId(uid, menuList);
+        return menuList;
+    }
+
+    private void setMenuChildrenByUserId(Integer uid, List<Menu> menuList) {
+        if (menuList != null) {
+            for (Menu menu : menuList) {
+                List<Menu> subMenuList = this.baseMapper.getMenuListByUserId(uid, menu.getMenuId());
+                menu.setChildren(subMenuList);
+                setMenuChildrenByUserId(uid, subMenuList);
+            }
+        }
+    }
+
     private void setMenuChildren(List<Menu> menuList) {
         if (menuList != null && menuList.size() > 0) {
             for (Menu menu : menuList) {

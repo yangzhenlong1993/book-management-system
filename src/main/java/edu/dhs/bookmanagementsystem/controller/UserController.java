@@ -79,13 +79,13 @@ public class UserController {
 
     @GetMapping("/{id}")
     public Result<User> getUserById(@PathVariable("id") Integer id) {
-        User user = userService.getById(id);
+        User user = userService.getUserById(id);
         return Result.success(user);
     }
 
     @DeleteMapping("/{id}")
     public Result<User> deleteUserById(@PathVariable("id") Integer id) {
-        userService.removeById(id);
+        userService.deleteUserById(id);
         return Result.success("delete user successfully");
     }
 }

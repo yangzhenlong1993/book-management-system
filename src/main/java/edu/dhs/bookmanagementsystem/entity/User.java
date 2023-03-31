@@ -1,11 +1,13 @@
 package edu.dhs.bookmanagementsystem.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * <p>
@@ -35,18 +37,6 @@ public class User implements Serializable {
     private String avatar;
 
     private Integer deleted;
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username=" + username +
-                ", password=" + password +
-                ", email=" + email +
-                ", phone=" + phone +
-                ", status=" + status +
-                ", avatar=" + avatar +
-                ", deleted=" + deleted +
-                "}";
-    }
+    @TableField(exist = false)
+    private List<Integer> roleIdList;
 }

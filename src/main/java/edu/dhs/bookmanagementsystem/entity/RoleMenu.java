@@ -4,7 +4,9 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -19,6 +21,8 @@ import java.io.Serializable;
 @TableName("role_menu")
 @ApiModel(value = "RoleMenu对象", description = "")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class RoleMenu implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -29,13 +33,4 @@ public class RoleMenu implements Serializable {
     private Integer roleId;
 
     private Integer menuId;
-
-    @Override
-    public String toString() {
-        return "RoleMenu{" +
-                "id=" + id +
-                ", roleId=" + roleId +
-                ", menuId=" + menuId +
-                "}";
-    }
 }

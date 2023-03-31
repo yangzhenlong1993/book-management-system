@@ -4,17 +4,23 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import edu.dhs.bookmanagementsystem.common.util.JwtUtil;
+import edu.dhs.bookmanagementsystem.entity.Menu;
 import edu.dhs.bookmanagementsystem.entity.User;
+import edu.dhs.bookmanagementsystem.entity.UserRole;
 import edu.dhs.bookmanagementsystem.mapper.UserMapper;
+import edu.dhs.bookmanagementsystem.mapper.UserRoleMapper;
+import edu.dhs.bookmanagementsystem.service.IMenuService;
 import edu.dhs.bookmanagementsystem.service.IUserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -25,11 +31,16 @@ import java.util.Map;
  * @since 2023-03-25
  */
 @Service
+@Transactional
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
     @Resource
     private PasswordEncoder passwordEncoder;
     @Resource
     private JwtUtil jwtUtil;
+    @Resource
+    private UserRoleMapper userRoleMapper;
+    @Resource
+    private IMenuService menuService;
 
     @Override
     public Map<String, Object> login(User user) {
@@ -68,6 +79,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         //according to the user id, find the user's roles
         List<String> roleList = this.baseMapper.getRoleNameByUserId(loginUser.getId());
         data.put("roles", roleList);
+
+        //permission list
+        List<Menu> menuList = menuService.getMenuListByUserId(loginUser.getId());
+        data.put("menuList", menuList);
         return data;
 
     }
@@ -93,13 +108,53 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public void addUser(User user) {
+        //insert data in user table
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        this.save(user);
+        this.baseMapper.insert(user);
+        //insert data in user_role table
+        List<Integer> roleIdList = user.getRoleIdList();
+        saveUserRoleList(user.getId(), roleIdList);
+    }
+
+    private void saveUserRoleList(Integer id, List<Integer> roleIdList) {
+        if (roleIdList != null) {
+            for (Integer roleId : roleIdList) {
+                userRoleMapper.insert(new UserRole(null, id, roleId));
+            }
+        }
     }
 
     @Override
     public void updateUser(User user) {
+        //update user table
         user.setPassword(null);
-        this.updateById(user);
+        this.baseMapper.updateById(user);
+        //clear the original user_role list
+        deleteUserRoleList(user.getId());
+        //set new user_role list
+        saveUserRoleList(user.getId(), user.getRoleIdList());
+    }
+
+    private void deleteUserRoleList(Integer id) {
+        LambdaQueryWrapper<UserRole> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(UserRole::getUserId, id);
+        userRoleMapper.delete(wrapper);
+    }
+
+    @Override
+    public User getUserById(Integer id) {
+        User user = this.baseMapper.selectById(id);
+        LambdaQueryWrapper<UserRole> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(UserRole::getUserId, id);
+        List<UserRole> userRoles = userRoleMapper.selectList(wrapper);
+        List<Integer> roleIds = userRoles.stream().map(userRole -> userRole.getRoleId()).collect(Collectors.toList());
+        user.setRoleIdList(roleIds);
+        return user;
+    }
+
+    @Override
+    public void deleteUserById(Integer id) {
+        this.baseMapper.deleteById(id);
+        deleteUserRoleList(id);
     }
 }

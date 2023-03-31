@@ -16,6 +16,13 @@ spring:
     url: jdbc:mysql://localhost:3306/book_management_system?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Australia/Sydney
     username: root
     password: 123456
+  cloud:
+    alicloud:
+      access-key: LTAI5tB9abvQYv5UDLSDEmWC
+      secret-key: 2kGvB8RD9oEjgOkQrbOEkAlejWHPrr
+      oss:
+        endpoint: oss-ap-southeast-2.aliyuncs.com
+        bucket: dhs-book-management
 #  redis:
 #    port: 6379
 #    host: localhost
@@ -29,6 +36,7 @@ mybatis-plus:
       logic-delete-field: deleted
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-aliases-package: edu.dhs.bookmanagementsystem.entity
 logging:
   level:
     edu.dhs.bookmanagementsystem: debug
