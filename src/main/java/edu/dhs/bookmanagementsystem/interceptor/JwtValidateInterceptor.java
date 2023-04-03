@@ -2,7 +2,9 @@ package edu.dhs.bookmanagementsystem.interceptor;
 
 import com.alibaba.fastjson.JSON;
 import edu.dhs.bookmanagementsystem.common.util.JwtUtil;
+import edu.dhs.bookmanagementsystem.common.util.UserThreadLocal;
 import edu.dhs.bookmanagementsystem.common.vo.Result;
+import edu.dhs.bookmanagementsystem.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
@@ -35,7 +37,8 @@ public class JwtValidateInterceptor implements HandlerInterceptor {
         log.debug(request.getRequestURI() + " need to be validated: " + token);
         if (token != null) {
             try {
-                jwtUtil.parseToken(token);
+                User user = jwtUtil.parseToken(token, User.class);
+                UserThreadLocal.setUser(user);
                 log.debug(request.getRequestURI() + "validation passed");
                 return true;
             } catch (Exception e) {
@@ -47,5 +50,11 @@ public class JwtValidateInterceptor implements HandlerInterceptor {
         Result<Map<String, Object>> fail = Result.fail(30003, "jwt not valid, please login again");
         response.getWriter().write(JSON.toJSONString(fail));
         return false; // intercept the request
+    }
+
+    //when request finished, clean the Threadlocal
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        UserThreadLocal.cleanUser();
     }
 }

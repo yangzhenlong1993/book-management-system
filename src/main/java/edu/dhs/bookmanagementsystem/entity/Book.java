@@ -33,6 +33,8 @@ public class Book implements Serializable {
 
     private LocalDateTime publicationDate;
 
+    private String coverImage;
+
     private String description;
 
     private String comment;

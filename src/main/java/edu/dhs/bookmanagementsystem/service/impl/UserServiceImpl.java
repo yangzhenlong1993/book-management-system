@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import edu.dhs.bookmanagementsystem.common.util.JwtUtil;
+import edu.dhs.bookmanagementsystem.common.util.UserThreadLocal;
 import edu.dhs.bookmanagementsystem.entity.Menu;
 import edu.dhs.bookmanagementsystem.entity.User;
 import edu.dhs.bookmanagementsystem.entity.UserRole;
@@ -65,12 +66,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public Map<String, Object> getUserInfo(String token) {
         //according to the token, get the user info from JWT
-        User loginUser = null;
-        try {
-            loginUser = jwtUtil.parseToken(token, User.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        User loginUser = UserThreadLocal.getUser();
 
         Map<String, Object> data = new HashMap<>();
         data.put("name", loginUser.getUsername());
@@ -89,6 +85,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public void logout(String token) {
+        //remove ThreadLocal data when log out in case that OOM
     }
 
     @Override

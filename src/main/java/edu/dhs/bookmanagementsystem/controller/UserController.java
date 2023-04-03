@@ -61,7 +61,6 @@ public class UserController {
     @GetMapping("/list")
     public Result<?> listUsersByConditions(@RequestParam(value = "username", required = false) String username, @RequestParam(value = "phone", required = false) String phone, @RequestParam("pageNo") Long pageNo, @RequestParam("pageSize") Long pageSize) {
         Map<String, Object> data = userService.getUsersByConditions(username, phone, pageNo, pageSize);
-
         return Result.success(data);
     }
 

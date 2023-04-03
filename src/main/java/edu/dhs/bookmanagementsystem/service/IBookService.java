@@ -3,6 +3,8 @@ package edu.dhs.bookmanagementsystem.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import edu.dhs.bookmanagementsystem.entity.Book;
 
+import java.util.Map;
+
 /**
  * <p>
  * 服务类
@@ -13,4 +15,13 @@ import edu.dhs.bookmanagementsystem.entity.Book;
  */
 public interface IBookService extends IService<Book> {
 
+    Map<String, Object> getUsersByConditions(String bookName, String author, String publisher, Long pageNo, Long pageSize);
+
+    void addBook(Book book);
+
+    void updateBook(Book book);
+
+    Book getBookById(Integer id);
+
+    void deleteBookById(Integer id);
 }

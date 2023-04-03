@@ -23,7 +23,6 @@ public class InterceptorConfig implements WebMvcConfigurer {
         registry.addInterceptor(jwtValidateInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/user/login",
-                        "/user/info",
                         "/user/logout",
                         "/error",
                         "/swagger-ui/**",

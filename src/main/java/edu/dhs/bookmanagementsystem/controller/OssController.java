@@ -7,6 +7,7 @@ import com.aliyun.oss.model.PolicyConditions;
 import edu.dhs.bookmanagementsystem.common.vo.Result;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -21,7 +22,8 @@ import java.util.Map;
  * @author: Zhenlong Yang
  * @create: 2023-03-31 21:27
  **/
-@RestController("/oss")
+@RestController
+@RequestMapping("/oss")
 public class OssController {
     @Resource
     private OSS ossClient;
