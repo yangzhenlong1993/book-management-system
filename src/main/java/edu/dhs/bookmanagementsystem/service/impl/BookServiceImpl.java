@@ -4,14 +4,15 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import edu.dhs.bookmanagementsystem.common.util.JwtUtil;
+import edu.dhs.bookmanagementsystem.common.util.UserThreadLocal;
 import edu.dhs.bookmanagementsystem.entity.Book;
 import edu.dhs.bookmanagementsystem.mapper.BookMapper;
-import edu.dhs.bookmanagementsystem.mapper.BookStatusMapper;
 import edu.dhs.bookmanagementsystem.service.IBookService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,8 +26,6 @@ import java.util.Map;
  */
 @Service
 public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements IBookService {
-    @Resource
-    BookStatusMapper bookStatusMapper;
     @Resource
     JwtUtil jwtUtil;
 
@@ -49,8 +48,9 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements IB
     @Override
     public void addBook(Book book) {
         //insert new book info into the book table
+        book.setStaffId(UserThreadLocal.getUser().getId());
+        book.setCreateTime(LocalDateTime.now());
         this.baseMapper.insert(book);
-        //insert the book status into the book_status table
 
     }
 

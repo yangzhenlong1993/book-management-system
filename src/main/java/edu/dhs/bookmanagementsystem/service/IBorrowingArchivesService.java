@@ -3,6 +3,8 @@ package edu.dhs.bookmanagementsystem.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import edu.dhs.bookmanagementsystem.entity.BorrowingArchives;
 
+import java.util.List;
+
 /**
  * <p>
  * borrower + staff+ book 服务类
@@ -13,4 +15,5 @@ import edu.dhs.bookmanagementsystem.entity.BorrowingArchives;
  */
 public interface IBorrowingArchivesService extends IService<BorrowingArchives> {
 
+    List<BorrowingArchives> getByBookId(Integer id);
 }

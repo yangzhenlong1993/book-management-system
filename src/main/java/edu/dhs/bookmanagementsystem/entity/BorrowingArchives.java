@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  * <p>
@@ -33,9 +33,9 @@ public class BorrowingArchives implements Serializable {
 
     private Integer bookId;
 
-    private LocalDateTime borrowDate;
+    private LocalDate borrowDate;
 
-    private LocalDateTime returnDate;
+    private LocalDate returnDate;
 
     private Integer extended;
 

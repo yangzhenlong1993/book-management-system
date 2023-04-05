@@ -2,10 +2,15 @@ package edu.dhs.bookmanagementsystem.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import edu.dhs.bookmanagementsystem.common.util.LocalDateDeserializer;
+import edu.dhs.bookmanagementsystem.common.util.LocalDateSerializer;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -31,13 +36,22 @@ public class Book implements Serializable {
 
     private String publisher;
 
-    private LocalDateTime publicationDate;
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate publicationDate;
 
     private String coverImage;
 
     private String description;
 
     private String comment;
+
+    private LocalDateTime createTime;
+
+    private Integer inStock;
+
+    private Integer staffId;
 
     private Integer deleted;
 }
