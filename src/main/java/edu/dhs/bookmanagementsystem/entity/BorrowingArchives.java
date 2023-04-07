@@ -3,6 +3,10 @@ package edu.dhs.bookmanagementsystem.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import edu.dhs.bookmanagementsystem.common.util.LocalDateDeserializer;
+import edu.dhs.bookmanagementsystem.common.util.LocalDateSerializer;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
@@ -33,8 +37,12 @@ public class BorrowingArchives implements Serializable {
 
     private Integer bookId;
 
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate borrowDate;
 
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate returnDate;
 
     private Integer extended;

@@ -85,7 +85,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public void logout(String token) {
-        //remove ThreadLocal data when log out in case that OOM
     }
 
     @Override

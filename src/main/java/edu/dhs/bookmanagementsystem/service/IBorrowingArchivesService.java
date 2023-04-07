@@ -1,9 +1,11 @@
 package edu.dhs.bookmanagementsystem.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import edu.dhs.bookmanagementsystem.common.vo.BorrowingHistoryVo;
 import edu.dhs.bookmanagementsystem.entity.BorrowingArchives;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * <p>
@@ -15,5 +17,5 @@ import java.util.List;
  */
 public interface IBorrowingArchivesService extends IService<BorrowingArchives> {
 
-    List<BorrowingArchives> getByBookId(Integer id);
+    List<BorrowingHistoryVo> getByBookId(Integer id) throws ExecutionException, InterruptedException;
 }
