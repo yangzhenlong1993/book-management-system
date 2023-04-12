@@ -15,7 +15,7 @@ The book management system allows users to create accounts with different roles,
 ![Screenshot 2023-04-11 154427](https://user-images.githubusercontent.com/54578367/231208813-1b280878-ba86-48f8-99d7-3b52c521b531.png)
 
 ## How to access?
-The project is now running on the AWS EC2. You can login with the super admin. the username is admin, the password is 123456.
+The project is now running on the AWS EC2. You can access the website with the address http://3.91.43.50/. You can login with the super admin. the username is admin, the password is 123456.
 
 ## TODO
 1. user info page
