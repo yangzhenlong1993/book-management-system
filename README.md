@@ -22,3 +22,4 @@ The project is now running on the AWS EC2. You can access the website with the a
 2. borrowing function
 3. normal readers can create normal reader account on the login page
 4. bookstore location function
+5. categories of books
