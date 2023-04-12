@@ -13,3 +13,12 @@ The book management system allows users to create accounts with different roles,
 ![Screenshot 2023-04-11 154408](https://user-images.githubusercontent.com/54578367/231216348-805ae148-d36e-49af-b48f-7a6bcc3680a9.png)
 ![Screenshot 2023-04-11 154447](https://user-images.githubusercontent.com/54578367/231208807-4c207def-1534-40db-ab1f-2715fb7f8aba.png)
 ![Screenshot 2023-04-11 154427](https://user-images.githubusercontent.com/54578367/231208813-1b280878-ba86-48f8-99d7-3b52c521b531.png)
+
+## How to access?
+The project is now running on the AWS EC2. You can login with the super admin. the username is admin, the password is 123456.
+
+## TODO
+1. user info page
+2. borrowing function
+3. normal readers can create normal reader account on the login page
+4. bookstore location function
